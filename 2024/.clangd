@@ -1,0 +1,6 @@
+CompileFlags:
+    Add:
+        - -xc++
+        - -std=c++23
+        - -I../common
+        - -Wall -Wextra -Werror
