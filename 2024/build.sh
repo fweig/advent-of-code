@@ -9,11 +9,9 @@ mk_next_day() {
     day=$1
     mkdir -p $day
     touch $day/task_a.cpp
-    touch $day/test_a.txt
-    touch $day/input_a.txt
     touch $day/task_b.cpp
-    touch $day/test_b.txt
-    touch $day/input_b.txt
+    touch $day/input_test.txt
+    touch $day/input.txt
     exit 0
 }
 
@@ -30,11 +28,10 @@ exe=build/${day}_task_$part
 
 compile=g++
 compile="$compile -xc++ -std=c++23 -Icommon -Wall -Wextra -Werror --max-errors=5 -ggdb"
-[[ -v asan ]] && compile="$compile -Og"
+[[ -v asan ]] && compile="$compile -Og --sanitize=address"
 [[ -v asan ]] || compile="$compile -O2"
 [[ -v trace ]] && compile="$compile -DTRACE"
 
-# compile="$compile -o $exe common/main.cpp $src"
 compile="$compile -o $exe $src"
 
 mkdir -p build
