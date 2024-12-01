@@ -28,8 +28,8 @@ exe=build/${day}_task_$part
 
 compile=g++
 compile="$compile -xc++ -std=c++23 -Icommon -Wall -Wextra -Werror --max-errors=5 -ggdb"
-[[ -v asan ]] && compile="$compile -Og --sanitize=address"
-[[ -v asan ]] || compile="$compile -O2"
+[[ -v asan ]]  && compile="$compile -Og --sanitize=address"
+[[ -v asan ]]  || compile="$compile -O2"
 [[ -v trace ]] && compile="$compile -DTRACE"
 
 compile="$compile -o $exe $src"
@@ -40,8 +40,8 @@ echo $compile
 $compile
 [[ $? -ne 0 ]] && exit 1
 
-[[ -v test ]] && exe="$exe $day/input_test.txt" \
-              || exe="$exe $day/input.txt"
+[[ -v test ]] && exe="$exe $day/input_test.txt"
+[[ -v test ]] || exe="$exe $day/input.txt"
 
 echo $exe
 $exe

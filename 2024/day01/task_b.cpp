@@ -1,7 +1,6 @@
 #define AOC_MAIN
 #include "aoc.h"
 
-#include <algorithm>
 #include <numeric>
 #include <vector>
 #include <span>

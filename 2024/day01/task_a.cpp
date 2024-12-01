@@ -48,10 +48,10 @@ std::vector<int> elementwise_distance(std::span<const int> left, std::span<const
 int64_t task(std::string_view input) {
     auto [left, right] = parse(input);
 
-    std::sort(left.begin(), left.end());
+    std::ranges::sort(left);
     trace(left);
 
-    std::sort(right.begin(), right.end());
+    std::ranges::sort(right);
     trace(right);
 
     auto sum = elementwise_distance(left, right);
