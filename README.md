@@ -1,3 +1,3 @@
 # Advent Of Code
 
-- 2024: C++ (1/25)
+- 2024: (modern) C++ (2/25)
