@@ -26,7 +26,7 @@ for arg in "$@"; do declare $arg='1'; done
 src=$day/task_$part.cpp
 exe=build/${day}_task_$part
 
-compile=g++
+compile=g++-14
 compile="$compile -xc++ -std=c++23 -Icommon -Wall -Wextra -Werror --max-errors=5 -ggdb"
 [[ -v asan ]]  && compile="$compile -Og --sanitize=address"
 [[ -v asan ]]  || compile="$compile -O2"
@@ -40,7 +40,9 @@ echo $compile
 $compile
 [[ $? -ne 0 ]] && exit 1
 
-[[ -v test ]] && exe="$exe $day/input_test.txt"
+[[ -v test ]] && [[ -f $day/input_test_$part.txt ]] && exe="$exe $day/input_test_$part.txt"
+[[ -v test ]] && [[ ! -f $day/input_test_$part.txt ]] && exe="$exe $day/input_test.txt"
+
 [[ -v test ]] || exe="$exe $day/input.txt"
 
 echo $exe
