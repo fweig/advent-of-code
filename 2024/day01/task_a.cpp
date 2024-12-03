@@ -1,10 +1,10 @@
-#define AOC_MAIN
-#include "aoc.h"
-
 #include <algorithm>
 #include <numeric>
 #include <vector>
 #include <span>
+
+#define AOC_MAIN
+#include "aoc.h"
 
 
 std::pair<std::vector<int>, std::vector<int>> parse(std::string_view input) {
@@ -49,10 +49,10 @@ int64_t task(std::string_view input) {
     auto [left, right] = parse(input);
 
     std::ranges::sort(left);
-    trace(left);
+    trace("{}", left);
 
     std::ranges::sort(right);
-    trace(right);
+    trace("{}", right);
 
     auto sum = elementwise_distance(left, right);
 

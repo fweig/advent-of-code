@@ -1,12 +1,13 @@
-#define AOC_MAIN
-#include "aoc.h"
-
 #include <algorithm>
 #include <ranges>
 #include <cstdint>
 #include <string_view>
 #include <stdexcept>
 #include <vector>
+
+#define AOC_MAIN
+#include "aoc.h"
+
 
 std::vector<std::vector<int>> parse(std::string_view input) {
     std::vector<std::vector<int>> out;

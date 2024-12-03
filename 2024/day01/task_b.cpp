@@ -1,9 +1,9 @@
-#define AOC_MAIN
-#include "aoc.h"
-
 #include <numeric>
 #include <vector>
 #include <span>
+
+#define AOC_MAIN
+#include "aoc.h"
 
 
 std::pair<std::vector<int>, std::vector<int>> parse(std::string_view input) {
