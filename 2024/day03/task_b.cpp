@@ -1,4 +1,5 @@
 
+#include "parse.h"
 #include <numeric>
 #include <ranges>
 #include <string_view>
@@ -13,41 +14,43 @@ struct multiply_instr {
 };
 
 std::vector<multiply_instr> parse(std::string_view input) {
+    set_input(input);
+
     std::vector<multiply_instr> out;
 
     bool enabled = true;
 
-    while (!input.empty()) {
-        if (consume(input, "do()")) {
+    while (!at_end()) {
+        if (try_consume("do()")) {
             enabled = true;
             continue;
         }
 
-        if (consume(input, "don't()")) {
+        if (try_consume("don't()")) {
             enabled = false;
             continue;
         }
 
-        if (!consume(input, "mul(")) {
-            input.remove_prefix(1);
+        if (!try_consume("mul(")) {
+            advance();
             continue;
         }
 
-        auto [x, ok] = consume_int(input);
+        auto [x, ok] = try_consume_int();
         if (!ok) {
             continue;
         }
 
-        if (!consume(input, ",")) {
+        if (!try_consume(",")) {
             continue;
         }
 
-        auto [y, ok2] = consume_int(input);
+        auto [y, ok2] = try_consume_int();
         if (!ok2) {
             continue;
         }
 
-        if (!consume(input, ")")) {
+        if (!try_consume(")")) {
             continue;
         }
 

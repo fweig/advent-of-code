@@ -32,7 +32,7 @@ compile="$compile -xc++ -std=c++23 -Icommon -Wall -Wextra -Werror --max-errors=5
 [[ -v asan ]]  || compile="$compile -O2"
 [[ -v trace ]] && compile="$compile -DTRACE"
 
-compile="$compile -o $exe $src"
+compile="$compile -o $exe common/parse.cpp $src"
 
 mkdir -p build
 
@@ -44,6 +44,8 @@ $compile
 [[ -v test ]] && [[ ! -f $day/input_test_$part.txt ]] && exe="$exe $day/input_test.txt"
 
 [[ -v test ]] || exe="$exe $day/input.txt"
+
+[[ -v gdb ]] && exe="gdb -batch -ex=r -ex=bt --args $exe"
 
 echo $exe
 $exe
