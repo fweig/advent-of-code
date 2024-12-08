@@ -9,40 +9,6 @@
 #define AOC_MAIN
 #include "aoc.h"
 
-
-struct vec2 {
-    int x;
-    int y;
-
-    constexpr vec2() : x(0), y(0) {}
-    constexpr vec2(int x, int y) : x(x), y(y) {}
-
-    vec2 operator+(vec2 o) {
-        return vec2(x + o.x, y + o.y);
-    }
-
-    bool operator==(vec2 o) {
-        return o.x == x && o.y == y;
-    }
-
-    vec2 rotate90deg() const {
-        return vec2(-y, x);
-    }
-};
-
-inline constexpr vec2 Up(0, -1);
-inline constexpr vec2 Down(0, 1);
-inline constexpr vec2 Left(-1, 0);
-inline constexpr vec2 Right(1, 0);
-
-int direction_to_idx(vec2 d) {
-    if (d == Up) return 0;
-    if (d == Down) return 1;
-    if (d == Left) return 2;
-    if (d == Right) return 3;
-    throw std::runtime_error("Invalid direction!");
-}
-
 enum class Cell {
     Empty,
     Visited,
