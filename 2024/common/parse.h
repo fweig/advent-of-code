@@ -7,7 +7,9 @@ void set_input(std::string_view);
 
 bool at_end();
 
-void advance(size_t n=1);
+char advance();
+void advance(int n);
+
 
 bool try_consume(std::string_view prefix);
 void consume(std::string_view prefix);

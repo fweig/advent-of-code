@@ -13,7 +13,13 @@ bool at_end() {
     return I.empty();
 }
 
-void advance(size_t n) {
+char advance() {
+    char c = I[0];
+    advance(1);
+    return c;
+}
+
+void advance(int n) {
     I.remove_prefix(n);
 }
 
