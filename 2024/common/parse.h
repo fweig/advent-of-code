@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <string_view>
 
 void set_input(std::string_view);
@@ -14,5 +15,5 @@ void consume(std::string_view prefix);
 bool try_consume_newline();
 void consume_newline();
 
-std::pair<int, bool> try_consume_int();
-int consume_int();
+std::pair<int64_t, bool> try_consume_int();
+int64_t consume_int();

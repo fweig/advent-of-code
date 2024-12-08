@@ -40,9 +40,9 @@ void consume_newline() {
     return consume("\n");
 }
 
-std::pair<int, bool> try_consume_int() {
+std::pair<int64_t, bool> try_consume_int() {
     char *end;
-    const int x = std::strtol(I.data(), &end, 10);
+    const long x = std::strtol(I.data(), &end, 10);
     ptrdiff_t bytes_read = end - I.data();
 
     advance(bytes_read);
@@ -50,7 +50,7 @@ std::pair<int, bool> try_consume_int() {
     return {x, bytes_read > 0};
 }
 
-int consume_int() {
+int64_t consume_int() {
     auto [x, ok] = try_consume_int();
 
     if (!ok) {
