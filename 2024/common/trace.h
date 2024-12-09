@@ -43,26 +43,4 @@ struct std::formatter<T> {
     }
 };
 
-// Formatter for map-like containers
-template <MapLike T>
-struct std::formatter<T> {
-    constexpr auto parse(std::format_parse_context& ctx) {
-        return ctx.begin();
-    }
-
-    auto format(const T& map, std::format_context& ctx) const {
-        if (map.empty()) {
-            return std::format_to(ctx.out(), "{}");
-        }
-
-        auto out = std::format_to(ctx.out(), "{{");
-        auto it = map.begin();
-        while (it != std::prev(map.end())) {
-            std::format_to(out, "{}: {}, ", it->first, it->second);
-            ++it;
-        }
-        return std::format_to(out, "{}: {}}}", it->first, it->second);
-    }
-};
-
 #endif
