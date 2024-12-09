@@ -120,15 +120,11 @@ iterator_t find_next_empty(std::list<block> &blocks, iterator_t st) {
 
 
 void defragment(std::list<block> &blocks) {
-    trace("{}" , blocks);
-
     for (auto end = --blocks.end(); end != blocks.begin(); end--) {
 
         if (end->empty()) continue;
 
         for (auto st = blocks.begin(); st != end; st++) {
-
-            // trace("st = {}, {}", *st, std::distance(blocks.begin(), st));
 
             if (!st->empty()) continue;
 
@@ -143,13 +139,9 @@ void defragment(std::list<block> &blocks) {
             update_block_size(blocks, st, size_empty - size_move, true);
 
             end->idx = -1;
-            merge_blocks(blocks, end, st);
-            trace("{}" , blocks);
+            merge_blocks(blocks, st, end);
             break;
         }
-
-
-
     }
 }
 
@@ -174,6 +166,7 @@ int64_t task(std::string_view input) {
     auto blocks = parse(input);
 
     defragment(blocks);
+    trace("{}", blocks);
     auto chk = checksum(blocks);
     return chk;
 }
