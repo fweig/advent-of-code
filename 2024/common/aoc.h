@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <iterator>
+#include <stdexcept>
 #include <string_view>
 #include <fstream>
 #include <cstdio>
@@ -78,14 +79,27 @@ class grid {
 
 public:
     grid(std::vector<T> &&data, size_t width)
-        : data(std::move(data))
-        , m_width(width)
-        , m_height(this->data.size() / width) {
+            : data(std::move(data))
+            , m_width(width)
+            , m_height(this->data.size() / width) {
+        if (this->data.size() % width != 0) {
+            throw std::runtime_error("grid: data size not divisible by width!");
+        }
+    }
+
+    grid(size_t w, size_t h) 
+            : data(w * h)
+            , m_width(w)
+            , m_height(h) {
     }
 
     T &operator[](vec2 p) {
         assert(inside(p));
         return data[p.y * m_width + p.x];
+    }
+
+    T &operator[](int x, int y) {
+        return (*this)[vec2(x, y)];
     }
 
     T at_or(vec2 p, T fallback) {
