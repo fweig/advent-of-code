@@ -43,6 +43,12 @@ struct vec2 {
     }
 };
 
+
+vec2 operator*(int s, vec2 v) {
+    return vec2(s * v.x, s * v.y);
+}
+
+
 template<>
 struct std::hash<vec2> {
     size_t operator()(vec2 v) const {
@@ -87,7 +93,7 @@ public:
         }
     }
 
-    grid(size_t w, size_t h) 
+    grid(size_t w, size_t h)
             : data(w * h)
             , m_width(w)
             , m_height(h) {
@@ -107,6 +113,10 @@ public:
             return (*this)[p];
         }
         return fallback;
+    }
+
+    void set_all(T x) {
+        data.assign(data.size(), x);
     }
 
     size_t width() const { return m_width; }
@@ -143,7 +153,7 @@ int main(int argc, const char** argv) {
     std::string input(std::istreambuf_iterator<char>(infile), {});
 
     auto result = task(input);
-    printf("%ld\n", result);
+    printf("%lld\n", result);
     return 0;
 }
 #endif
